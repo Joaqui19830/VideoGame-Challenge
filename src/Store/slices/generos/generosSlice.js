@@ -1,25 +1,15 @@
-import {createSlice} from '@reduxjs/toolkit';
-import { videogamesSlice } from '../videogames/videogamesSlice';
+import { createSlice } from "@reduxjs/toolkit";
 
 export const generosSlice = createSlice({
-    name: 'Generos',
-    initialState:{
-        isLoadingGeneros: true,
-        generos: [],
+  name: "Generos",
+  initialState: {
+    generos: [],
+  },
+  reducers: {
+    setGeneros: (state, actions) => {
+      state.generos = actions.payload.generos;
     },
-    reducers:{
-        starGenerosLoading:(state, _) => {
-            state.isLoadingGeneros = true;
-        },
-        setGeneros:(state, actions) => {
-            state.generos = actions.payload.generos;
-
-            state.isLoadingGeneros = false;
-        }
-    }
+  },
 });
 
-export const {
-    starGenerosLoading,
-    setGeneros
-} = videogamesSlice.actions;
+export const { starGenerosLoading, setGeneros } = generosSlice.actions;

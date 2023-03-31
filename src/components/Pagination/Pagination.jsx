@@ -7,7 +7,7 @@
 // export default function Pagination({videogamePerPage}){
     
 //     const dispatch = useDispatch();
-//     const { videoGames = [] } = useSelector(state => state.countryReducer);
+//     const { videoGames = [] } = useSelector(state => state.videgamesReducer);
     
 //     const handleClick = (page) => {
 //         dispatch(setCurrentPage(page))

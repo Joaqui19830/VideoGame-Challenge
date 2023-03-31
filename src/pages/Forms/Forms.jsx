@@ -1,11 +1,18 @@
 // import axios from "axios";
-import { useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getGeneros } from "../../Store/slices/generos/thunk";
+import { setNewVideogame } from "../../Store/slices/videogames/thunk";
 import "./Form.module.css";
 
 function Forms() {
-  const formRef = useRef();
-  const { generos = [] } = useSelector((state) => state.countryReducer);
+  const { generos = [] } = useSelector((state) => state.generosReducer);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getGeneros());
+  }, [dispatch]);
 
   const [formFields, setFormFields] = useState({
     name: "",
@@ -19,8 +26,7 @@ function Forms() {
     fechaDeLanzamientoError: false,
     rating: "",
     ratingError: false,
-    generosId: "",
-    generosIdError: false,
+    generos: [],
   });
 
   function handleChange(evt) {
@@ -31,13 +37,28 @@ function Forms() {
       ...formFields,
       [name]: value,
     };
-
     switch (name) {
       case "rating":
         if (!isNaN(value)) {
           // Sincroniza el estado de nuevo
           setFormFields(newValues);
         }
+        break;
+      case "generos":
+        if (formFields.generos.includes(value)) {
+          const index = formFields.generos.indexOf(value);
+          if (index > -1) {
+            // only splice array when item is found
+            formFields.generos.splice(index, 1); // 2nd parameter means remove one item only
+          }
+        } else {
+          formFields.generos.push(value);
+        }
+
+        setFormFields({
+          ...formFields,
+          [name]: [...formFields.generos],
+        });
         break;
 
       default:
@@ -66,33 +87,39 @@ function Forms() {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    // console.log(e.target.value);
-
-    const formData = new FormData(formRef.current);
-    const values = Object.fromEntries(formData);
 
     if (
       formFields.descripcionError ||
-      formFields.generosIdError ||
       formFields.nameError ||
       formFields.fechaDeLanzamientoError ||
       formFields.ratingError ||
-      formFields.plataformasError
+      formFields.plataformasError ||
+      formFields.generos.length === 0
     ) {
       alert("che completa todo");
     } else {
-      console.log(values);
-    //  axios.post('http://localhost:3001/videogames', values)
-    //                   .then(res => alert(res))
-    //                   .catch(err => alert(err))
-                    
+      // console.log(formFields);
+      dispatch(
+        setNewVideogame({
+          name: formFields.name,
+          descripcion: formFields.descripcion,
+          plataformas: [formFields.plataformas],
+          imagen: formFields.imagen,
+          fechaDeLanzamiento: formFields.fechaDeLanzamiento,
+          rating: formFields.rating,
+          generosId: formFields.generos,
+        })
+      );
+      //  axios.post('http://localhost:3001/videogames', values)
+      //                   .then(res => alert(res))
+      //                   .catch(err => alert(err))
     }
     // axios.post("Mandamos el url post que está en postam")
     // .then(res => alert(res))
     // .catch(err => alert(err))
   };
   return (
-    <form onSubmit={submitHandler} ref={formRef}>
+    <form onSubmit={submitHandler}>
       <h1>Formulario para crear un videojuego</h1>
       <div className="input-item">
         <div className="label-input-item">
@@ -198,7 +225,7 @@ function Forms() {
                   <input
                     type="checkbox"
                     name="generos"
-                    value={genero.name}
+                    value={genero.id}
                     // value={formFields.generoField}
                     onChange={handleChange}
                     onBlur={handleBlur}
@@ -209,9 +236,10 @@ function Forms() {
             })}
           </p>
         </div>
-    
       </div>
-      <button type="submit" disabled= {!formFields.name}>Crear Videogame</button>
+      <button type="submit" disabled={!formFields.name}>
+        Crear Videogame
+      </button>
     </form>
   );
 }

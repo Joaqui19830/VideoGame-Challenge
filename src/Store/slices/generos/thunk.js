@@ -1,14 +1,14 @@
-import axios from 'axios';
-import { starGenerosLoading } from './generosSlice';
+import { setGeneros } from "./generosSlice";
+import axios from "axios";
 
 export const getGeneros = () => {
-    return async (dispatch, getState) => {
-        dispatch(starGenerosLoading);
+  return async (dispatch, getState) => {
+    const { data = [] } = await axios.get("http://localhost:3001/genres");
 
-        const {data = []} = await axios.get('http://localhost:3001/genres');
-
-        console.log('Generos -> ', data);
-
-        
-    }
-}
+    dispatch(
+      setGeneros({
+        generos: data,
+      })
+    );
+  };
+};

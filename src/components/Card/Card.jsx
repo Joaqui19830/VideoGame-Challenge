@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { setSelectedVideoGame } from "../../Store/slices/country/countrySlice";
+import { setSelectedVideoGame } from "../../Store/slices/videogames";
 import style from "../Card/Card.module.css";
 
 function Card({ videoGame }) {

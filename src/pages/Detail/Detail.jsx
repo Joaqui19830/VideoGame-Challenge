@@ -7,7 +7,7 @@ function Detail() {
     // const { id } = useParams()
     // console.log(id);
 
-    const {  selectedVideoGame = [] } = useSelector(state => state.countryReducer);
+    const {  selectedVideoGame = [] } = useSelector(state => state.videgamesReducer);
     
     const navigate = useNavigate()
     const backTo = () => {

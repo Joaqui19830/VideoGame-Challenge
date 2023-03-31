@@ -11,16 +11,18 @@ import { getVideogames } from "../../Store/slices/videogames";
 import nextArrow from "../../assets/img/arrow-forward.png";
 import previousArrow from "../../assets/img/arrow-back.png";
 import homeStyle from "./Home.module.css";
+import { getGeneros } from "../../Store/slices/generos/thunk";
 
 function Home() {
   const { page, hideNextPageButton, hidePreviousPageButton } = useSelector(
-    (state) => state.countryReducer
+    (state) => state.videgamesReducer
   );
   // TODO: utilizar useeffect para obtener el listado al inicio
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getVideogames());
+    dispatch(getGeneros());
   }, [dispatch]);
   return (
     <div>
