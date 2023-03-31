@@ -1,10 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CardsContainer from "../../components/CardsContainer/CardsContainer";
-import {
-  setPage,
-  setPagePrevius,
-} from "../../Store/slices/videogames";
+import { setPage, setPagePrevius } from "../../Store/slices/videogames";
 import { getVideogames } from "../../Store/slices/videogames";
 
 import nextArrow from "../../assets/img/arrow-forward.png";
@@ -24,23 +21,25 @@ function Home() {
     dispatch(getGeneros());
   }, [dispatch]);
   return (
-    <div>
-      {/* <CardsContainer />
-      <img
-        style={{ visibility: hidePreviousPageButton ? "hidden" : "visible" }}
-        onClick={() => dispatch(setPagePrevius())}
-        src={previousArrow}
-        className={homeStyle.arrowButton}
-        alt=""
-      />
-      <span className={homeStyle.pageLabel}>{"Página: " + (page + 1)}</span>
-      <img
-        style={{ visibility: hideNextPageButton ? "hidden" : "visible" }}
-        onClick={() => dispatch(setPage())}
-        src={nextArrow}
-        className={homeStyle.arrowButton}
-        alt=""
-      /> */}
+    <div className={homeStyle.homeContainer}>
+      <CardsContainer />
+      <div className={homeStyle.paginadorContainer}>
+        <img
+          style={{ visibility: hidePreviousPageButton ? "hidden" : "visible" }}
+          onClick={() => dispatch(setPagePrevius())}
+          src={previousArrow}
+          className={homeStyle.arrowButton}
+          alt=""
+        />
+        <span className={homeStyle.pageLabel}>{"Página: " + (page + 1)}</span>
+        <img
+          style={{ visibility: hideNextPageButton ? "hidden" : "visible" }}
+          onClick={() => dispatch(setPage())}
+          src={nextArrow}
+          className={homeStyle.arrowButton}
+          alt=""
+        />
+      </div>
     </div>
   );
 }

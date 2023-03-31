@@ -1,8 +1,21 @@
-.arrowButton{
+.homeContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+
+.paginadorContainer {
+    width: 100%;
+    padding: 10px 0;
+}
+
+.arrowButton {
     width: 12px;
     height: 12px;
 }
 
-.pageLabel{
+.pageLabel {
     margin: 0px 16px
 }

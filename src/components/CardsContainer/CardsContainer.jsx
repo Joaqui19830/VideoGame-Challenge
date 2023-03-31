@@ -5,7 +5,7 @@ import style from "../CardsContainer/CardsContainer.module.css";
 function CardsContainer() {
   const { videoGames = [] } = useSelector((state) => state.videgamesReducer);
   return (
-    <div className={style.conntainerCards}>
+    <div className={style.containerCardList}>
       {videoGames.map((videogame, id) => {
         return <Card key={id} videoGame={videogame} />;
       })}
