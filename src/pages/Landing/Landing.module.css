@@ -1,0 +1,86 @@
+.container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-image: url('../../assets/img/background_3.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.topContainer{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.middleContainer{
+    width: 100%;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* .right {
+   
+    color: black;
+    height: 100%;
+    width: 150vh;
+    position: relative;
+}
+
+.left {
+   
+    flex-grow: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+} */
+
+.imgStyle{
+    z-index: -1;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.innerContainer{
+    padding: 0 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    color: white;
+}
+
+.customButton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    padding: 10px 30px;
+    background: rgb(36, 47, 155);
+    background: linear-gradient(
+        0deg,
+        rgba(36, 47, 155, 1) 0%,
+        rgba(219, 223, 253, 1) 100%
+    );
+    box-shadow: 10px 10px 17px -16px rgba(0, 0, 0, 0.75);
+    -webkit-box-shadow: 10px 10px 17px -16px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 10px 10px 17px -16px rgba(0, 0, 0, 0.75);
+    border-radius: 5px;
+    -webkit-user-select: none;
+    -ms-user-select:none;
+    user-select: none;
+    cursor: pointer;
+    
+ }

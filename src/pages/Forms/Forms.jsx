@@ -48,8 +48,8 @@ function Forms() {
         if (formFields.generos.includes(value)) {
           const index = formFields.generos.indexOf(value);
           if (index > -1) {
-            // only splice array when item is found
-            formFields.generos.splice(index, 1); // 2nd parameter means remove one item only
+          
+            formFields.generos.splice(index, 1); 
           }
         } else {
           formFields.generos.push(value);
@@ -110,13 +110,8 @@ function Forms() {
           generosId: formFields.generos,
         })
       );
-      //  axios.post('http://localhost:3001/videogames', values)
-      //                   .then(res => alert(res))
-      //                   .catch(err => alert(err))
     }
-    // axios.post("Mandamos el url post que está en postam")
-    // .then(res => alert(res))
-    // .catch(err => alert(err))
+ 
   };
   return (
     <form onSubmit={submitHandler}>

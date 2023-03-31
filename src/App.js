@@ -11,7 +11,7 @@ function App() {
   const location = useLocation()
  
   return (
-    <div >
+    <div className='App' >
      {/* <AppRouter/> */} 
      { location.pathname !== '/' ? <NavBar/>  : null }
     
