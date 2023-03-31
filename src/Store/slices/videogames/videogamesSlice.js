@@ -30,16 +30,19 @@ export const videogamesSlice = createSlice({
           (state.page + 1) * limitOfElement
         ),
       ];
-
-      // state.generos = actions.payload.generos;
-
-      // state.regions = state.countries.map((country) => country.region);
-      // console.log(state.regions);
     },
     filterVideoGame: (state, actions) => {
       const valueToFilter = actions.payload.value.toUpperCase().trim();
       if (valueToFilter === "") {
-        state.videoGames = state.oldVideoGames;
+        state.oldVideoGames = actions.payload.videoGames;
+        const aux = [...state.oldVideoGames];
+
+        state.videoGames = [
+          ...aux.slice(
+            state.page * limitOfElement,
+            (state.page + 1) * limitOfElement
+          ),
+        ];
       } else {
         state.videoGames = state.oldVideoGames.filter((videogame) =>
           videogame.name.toUpperCase().includes(valueToFilter)
@@ -113,14 +116,14 @@ export const videogamesSlice = createSlice({
     },
 
     filtrarPorApiOBdd: (state, actions) => {
-      if(actions.payload === 'Api'){
-      state.videoGames = state.oldVideoGames.filter((item) => {
-         return  item.created === false
-        })
-      }else{
+      if (actions.payload === "Api") {
         state.videoGames = state.oldVideoGames.filter((item) => {
-          return item.created === true
-        })
+          return item.created === false;
+        });
+      } else {
+        state.videoGames = state.oldVideoGames.filter((item) => {
+          return item.created === true;
+        });
       }
     },
     setPage: (state, actions) => {
