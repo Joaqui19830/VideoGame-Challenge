@@ -9,9 +9,7 @@ function Landing() {
         <h1 className={style.innerContainer}>Bienvenid@!</h1>
       </div>
       <div className={style.middleContainer}>
-        <div className={style.customButton} onClick={() => navigate("/home")}>
-          Ingresar
-        </div>
+        <button onClick={() => navigate("/home")}>Ingresar</button>
       </div>
     </div>
   );

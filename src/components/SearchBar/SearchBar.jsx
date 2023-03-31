@@ -12,7 +12,9 @@ import style from "../SearchBar/SearchBar.module.css";
 
 function SearchBar() {
   const { generos = [] } = useSelector((state) => state.generosReducer);
+
   const [name, setName] = useState("");
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -61,7 +63,7 @@ function SearchBar() {
 
   return (
     <div className={style.container}>
-      <div>
+      <div className={style.searchStyle}>
         <input
           type="text"
           placeholder="Buscar..."
@@ -71,38 +73,35 @@ function SearchBar() {
         <button onClick={onClickSearch}>Buscar</button>
       </div>
 
-      <button onClick={GoHome}>Home</button>
+      <div className={style.secondSection}>
+        <button onClick={GoHome}>Home</button>
 
-      <button onClick={GoForms}>Crear Videojuego</button>
+        <button onClick={GoForms}>Crear Videojuego</button>
 
-      <select onChange={handleChangeOrderByName}>
-        <option value="asc">Ascendente</option>
-        <option value="desc">Descendente</option>
-      </select>
-      <select onChange={handleChangeOrderRating}>
-        <option>Rating</option>
-        <option value="asc">Ascendente</option>
-        <option value="desc">Descendente</option>
-      </select>
-      <select onChange={handleChangeOrderApiAndBdd}>
-        {/* <option>All</option> */}
-        <option value="Api">Api</option>
-        
-        <option>BDD</option>
-      </select>
-      {/* <select onChange={handleChangeOrderRating}>
-                <option value="asc" >Ascendente por rating</option>
-                <option value="desc">Descendente por rating</option>
-             </select> */}
-      <select onChange={handleChangeGenero}>
-        <option value="All">All genres</option>
+        <select onChange={handleChangeOrderByName}>
+          <option value="asc">Ascendente</option>
+          <option value="desc">Descendente</option>
+        </select>
+        <select onChange={handleChangeOrderRating}>
+          <option>Rating</option>
+          <option value="asc">Ascendente</option>
+          <option value="desc">Descendente</option>
+        </select>
+        <select onChange={handleChangeOrderApiAndBdd}>
+          <option value="Api">Api</option>
 
-        {generos.map((genre, idx) => (
-          <option key={idx} value={genre.name}>
-            {genre.name}{" "}
-          </option>
-        ))}
-      </select>
+          <option>BDD</option>
+        </select>
+        <select onChange={handleChangeGenero}>
+          <option value="All">All genres</option>
+
+          {generos.map((genre, idx) => (
+            <option key={idx} value={genre.name}>
+              {genre.name}{" "}
+            </option>
+          ))}
+        </select>
+      </div>
     </div>
   );
 }

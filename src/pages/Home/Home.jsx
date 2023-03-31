@@ -5,7 +5,6 @@ import {
   setPage,
   setPagePrevius,
 } from "../../Store/slices/videogames";
-// import Pagination from "../../components/Pagination/Pagination";
 import { getVideogames } from "../../Store/slices/videogames";
 
 import nextArrow from "../../assets/img/arrow-forward.png";
@@ -26,7 +25,7 @@ function Home() {
   }, [dispatch]);
   return (
     <div>
-      <CardsContainer />
+      {/* <CardsContainer />
       <img
         style={{ visibility: hidePreviousPageButton ? "hidden" : "visible" }}
         onClick={() => dispatch(setPagePrevius())}
@@ -41,7 +40,7 @@ function Home() {
         src={nextArrow}
         className={homeStyle.arrowButton}
         alt=""
-      />
+      /> */}
     </div>
   );
 }

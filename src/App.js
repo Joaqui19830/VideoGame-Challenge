@@ -3,8 +3,8 @@ import Landing from '../src/pages/Landing/Landing.jsx';
 import Home from '../src/pages/Home/Home.jsx';
 import Forms from '../src/pages/Forms/Forms.jsx';
 import Detail from '../src/pages/Detail/Detail.jsx';
-import NavBar from '../src/components/NavBar/NavBar.jsx';
 import './App.css'
+import SearchBar from './components/SearchBar/SearchBar.jsx';
 // import AppRouter from './router/AppRouter';
 
 function App() {
@@ -12,8 +12,7 @@ function App() {
  
   return (
     <div className='App' >
-     {/* <AppRouter/> */} 
-     { location.pathname !== '/' ? <NavBar/>  : null }
+     { location.pathname !== '/' ? <SearchBar/>  : null }
     
      <Routes>
         <Route path='/' element={<Landing/>}/>
