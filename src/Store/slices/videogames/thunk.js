@@ -19,16 +19,14 @@ export const getVideogames = (page = 0) => {
 
 export const setNewVideogame = (payload) => {
   return async (dispatch, getState) => {
-   
     // TODO: que muestre un loading mientras se ejecuta el post
-    
-    
+
     // // TODO: Realizar Peticion https
-    const res = await axios.post(`http://localhost:3001/videogames`, payload);
-    console.log("Post ejecutado");
-    console.log(res);
-    // dispatch(setVideoGames({
-    //     videoGames: data,
-    // }));
+    const { data = {} } = await axios.post(
+      `http://localhost:3001/videogames`,
+      payload
+    );
+    // console.log(data);
+    alert(`${data.message ?? data.error}`);
   };
 };

@@ -34,7 +34,6 @@ export const videogamesSlice = createSlice({
     filterVideoGame: (state, actions) => {
       const valueToFilter = actions.payload.value.toUpperCase().trim();
       if (valueToFilter === "") {
-        state.oldVideoGames = actions.payload.videoGames;
         const aux = [...state.oldVideoGames];
 
         state.videoGames = [
