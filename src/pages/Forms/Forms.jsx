@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getGeneros } from "../../Store/slices/generos/thunk";
 import { setNewVideogame } from "../../Store/slices/videogames/thunk";
 import "./Form.module.css";
+import { storage } from "../../firebase";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 function Forms() {
   const { generos = [] } = useSelector((state) => state.generosReducer);
@@ -17,7 +19,8 @@ function Forms() {
   const [formFields, setFormFields] = useState({
     name: "",
     nameError: false,
-    imagen: "",
+    imagen: null,
+    imagenUrl: "",
     descripcion: "",
     descripcionError: false,
     plataformas: "",
@@ -38,6 +41,17 @@ function Forms() {
       [name]: value,
     };
     switch (name) {
+      case "imagen":
+        if (evt.target.files && evt.target.files[0]) {
+          setFormFields({
+            ...formFields,
+            [name]: evt.target.files[0],
+            [`${name}Url`]: URL.createObjectURL(evt.target.files[0]),
+          });
+          
+        }
+        console.log(formFields);
+        break;
       case "rating":
         if (!isNaN(value)) {
           // Sincroniza el estado de nuevo
@@ -48,8 +62,7 @@ function Forms() {
         if (formFields.generos.includes(value)) {
           const index = formFields.generos.indexOf(value);
           if (index > -1) {
-          
-            formFields.generos.splice(index, 1); 
+            formFields.generos.splice(index, 1);
           }
         } else {
           formFields.generos.push(value);
@@ -64,6 +77,7 @@ function Forms() {
       default:
         // Sincroniza el estado de nuevo
         setFormFields(newValues);
+
         break;
     }
   }
@@ -85,8 +99,25 @@ function Forms() {
     }
   }
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
+
+  
+    if (formFields.imagen == null) return;
+
+    // console.log(formFields.imagen);
+    const imageRef = ref(storage, `images/foto.jpg`);
+    const newMetadata = {
+      contentType: "image/jpeg",
+    };
+
+    console.log("Se está subiendo la imagen");
+    await uploadBytes(imageRef, formFields.imagen, newMetadata);
+
+    alert("Image Uploaded");
+    const url = await getDownloadURL(imageRef);
+
+    console.log(url);
 
     if (
       formFields.descripcionError ||
@@ -104,14 +135,13 @@ function Forms() {
           name: formFields.name,
           descripcion: formFields.descripcion,
           plataformas: [formFields.plataformas],
-          imagen: formFields.imagen,
+          imagen: url,
           fechaDeLanzamiento: formFields.fechaDeLanzamiento,
           rating: formFields.rating,
           generosId: formFields.generos,
         })
       );
     }
- 
   };
   return (
     <form onSubmit={submitHandler}>
@@ -151,15 +181,22 @@ function Forms() {
         </div>
         <br />
         <div>
-          <img src={formFields.imagen} alt={formFields.imagen} />
+          {/* <img src={selectedFile.data} alt={formFields.imagen} /> */}
           <label>Imagen:</label>
           <input
+            name="imagen"
+            type="file"
+            onChange={handleChange}
+            className="filetype"
+          />
+          <img alt="preview image" src={formFields.imagenUrl} />
+          {/* <input
             type="file"
             name="imagen"
             accept="image/*"
             value={formFields.imagen}
             onChange={handleChange}
-          />
+          /> */}
         </div>
         <br />
         <div>

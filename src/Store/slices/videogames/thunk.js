@@ -1,12 +1,13 @@
 import { setVideoGames, startLoading } from "./videogamesSlice";
 import axios from "axios";
+import {BASE_URL} from '../../../pages/utils/custom_const';
 
 export const getVideogames = (page = 0) => {
   return async (dispatch, getState) => {
     dispatch(startLoading());
 
     // TODO: Realizar Peticion https
-    const { data = [] } = await axios.get(`http://localhost:3001/videogames`);
+    const { data = [] } = await axios.get(`${BASE_URL}/videogames`);
     // console.log(data);
 
     dispatch(
@@ -23,7 +24,7 @@ export const setNewVideogame = (payload) => {
 
     // // TODO: Realizar Peticion https
     const { data = {} } = await axios.post(
-      `http://localhost:3001/videogames`,
+      `${BASE_URL}/videogames`,
       payload
     );
     // console.log(data);

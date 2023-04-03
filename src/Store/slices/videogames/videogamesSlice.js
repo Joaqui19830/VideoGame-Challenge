@@ -116,13 +116,20 @@ export const videogamesSlice = createSlice({
 
     filtrarPorApiOBdd: (state, actions) => {
       if (actions.payload === "Api") {
+        
         state.videoGames = state.oldVideoGames.filter((item) => {
           return item.created === false;
+       
         });
+        
+
+        
+    
       } else {
         state.videoGames = state.oldVideoGames.filter((item) => {
           return item.created === true;
         });
+        
       }
     },
     setPage: (state, actions) => {
